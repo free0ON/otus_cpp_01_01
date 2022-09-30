@@ -1,8 +1,21 @@
 cmake_minimum_required(VERSION 3.2)
 
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
+message("PATCH_VERSION: ${PATCH_VERSION}")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
-project(helloworld VERSION 0.0.$ENV{GITHUB_RUN_NUMBER})
+message("PROJECT_VESRION: ${PROJECT_VESRION}")
+
+if (GITHUB_RUN_NUMBER)
+	project(helloworld VERSION 0.0.$ENV{GITHUB_RUN_NUMBER})
+else()
+	project(helloworld VERSION ${PROJECT_VESRION})
+endif()
+
+message("PROJECT_VERSION_MAJOR: ${PROJECT_VERSION_MAJOR}")
+message("PROJECT_VERSION_MINOR: ${PROJECT_VERSION_MINOR}")
+message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
+
+# project(helloworld VERSION 0.0.$ENV{GITHUB_RUN_NUMBER})
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in version.h)
@@ -62,7 +75,7 @@ set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-set(CPACK_PACKAGE_CONTACT example@example.com)
+set(CPACK_PACKAGE_CONTACT dmitrii.lozovoi@yandex.ru)
 
 include(CPack)
 
