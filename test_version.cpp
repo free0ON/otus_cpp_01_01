@@ -4,6 +4,7 @@
 
 #include <boost/test/unit_test.hpp>
 // Boost test
+// Change to GoogleTest
 
 BOOST_AUTO_TEST_SUITE(test_version)
 
