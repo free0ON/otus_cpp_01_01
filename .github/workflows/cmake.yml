@@ -16,7 +16,12 @@ jobs:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
       - run: sudo apt-get update && sudo apt-get install googletest -y
-      - run: sudo apt-get update && sudo apt-get install catch2 -y
+      - run: sudo apt-get update
+      - run: git clone https://github.com/catchorg/Catch2.git
+      - run: cd Catch2
+      - run: cmake -Bbuild -H. -DBUILD_TESTING=OFF
+      - run: sudo cmake --build build/ --target install -y
+      
       
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DBOOST_TEST=ON -DGOOGLE_TEST=ON -DCATCH2_TEST=ON
       - run: cmake --build .
