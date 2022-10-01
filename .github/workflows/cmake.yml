@@ -19,7 +19,6 @@ jobs:
       - run: sudo apt-get update -y
       - run: git clone https://github.com/Microsoft/vcpkg.git
       - run: ./vcpkg/bootstrap-vcpkg.sh
-      - run: ./vcpkg/vcpkg install
       - run: ./vcpkg/vcpkg install catch2
       - run: cd /home
       
