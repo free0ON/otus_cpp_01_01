@@ -67,7 +67,7 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-    add_subdirectory("/usr/src/gtest" ${CMAKE_BINARY_DIR}/gtest)
+    enable_testing()
     find_package(GTest REQUIRED)
     add_executable(google_test_version google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
@@ -78,7 +78,6 @@ if(GOOGLE_TEST)
         google_test_version 
         gtest gtest_main 
         helloworld)
-    enable_testing()
     include(GoogleTest)
     add_test(google_test_version google_test_version)
     if (MSVC)
