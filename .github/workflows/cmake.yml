@@ -19,8 +19,8 @@ jobs:
       - run: sudo apt-get update -y
       - run: git clone https://github.com/Microsoft/vcpkg.git
       - run: ./vcpkg/bootstrap-vcpkg.sh
-      - run: ./vcpkg integrate install
-      - run: ./vcpkg install catch2
+      - run: ./vcpkg/vcpkg install
+      - run: ./vcpkg/vcpkg install catch2
       - run: cd /home
       
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DBOOST_TEST=ON -DGOOGLE_TEST=ON -DCATCH2_TEST=ON
