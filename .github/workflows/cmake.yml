@@ -49,8 +49,8 @@ jobs:
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
           -DCATCH2_TEST=${{ env.CATCH2_TEST }}
       - run: cmake --build . 
-        if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
       - run: cmake --build . --target test 
+        if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
       - run: cmake --build . --target package 
       - name: Create Release
         id: create_release
