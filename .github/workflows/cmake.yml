@@ -77,7 +77,7 @@ jobs:
           asset_content_type: application/vnd.debian.binary-package
       - name: Download and Run program
         id: download-release-asset
-        uses: actions/download-release-asset@v1
+        #uses: actions/download-release-asset@v1
         env:
           RELEASE_DOWNLOAD_URL: "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
       - run: |
