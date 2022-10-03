@@ -3,7 +3,7 @@ env:
   PROJECT_NAME: helloworld
   MAJOR_VERSION: 0
   MINOR_VERSION: 0
-  PATCH_VERSION: github.run_number
+  PATCH_VERSION: ${{ github.run_number }}
   BOOST_TEST: ON
   GOOGLE_TEST: ON
   CATCH2_TEST: ON
