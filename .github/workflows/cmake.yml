@@ -8,8 +8,8 @@ env:
   
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
-  GOOGLE_TEST: OFF
-  CATCH2_TEST: OFF
+  GOOGLE_TEST: ON
+  CATCH2_TEST: ON
   
 on:
   push:
