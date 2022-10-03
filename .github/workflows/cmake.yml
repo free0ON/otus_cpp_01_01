@@ -1,9 +1,9 @@
 name: 'C++ CI'
 env:
   PROJECT_NAME: helloworld
-  MAJOR_VERSION: 0
-  MINOR_VERSION: 0
-  PATCH_VERSION: ${{ github.run_number }}
+  PROJECT_MAJOR_VERSION: 0
+  PROJECT_MINOR_VERSION: 0
+  PROJECT_PATCH_VERSION: ${{ github.run_number }}
   BOOST_TEST: ON
   GOOGLE_TEST: ON
   CATCH2_TEST: ON
@@ -34,7 +34,7 @@ jobs:
           #git clone https://github.com/Microsoft/vcpkg.git
           #./vcpkg/bootstrap-vcpkg.sh
           #./vcpkg/vcpkg install catch2
-      - run: cmake . -DMAJOR_VERSION=${{ env.MAJOR_VERSION }} -DMINOR_VERSION=${{ env.MINOR_VERSION }} -DPATCH_VERSION=${{ env.PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
+      - run: cmake . -DPROJECT_MAJOR_VERSION=${{ env.PROJECT_MAJOR_VERSION }} -DPROJECT_MINOR_VERSION=${{ env.PROJECT_MINOR_VERSION }} -DPROJECT_PATCH_VERSION=${{ env.PROJECT_PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
