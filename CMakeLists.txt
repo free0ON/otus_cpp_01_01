@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
-unset(PROJECT_VERSION)
-unset(PROJECT_MAJOR_VERSION)
-unset(PROJECT_MINOR_VERSION)
-unset(PROJECT_PATCH_VERSION)
-
-unset(PROJECT_NAME)
+unset(PROJECT_VERSION CACHE)
+unset(PROJECT_MAJOR_VERSION CACHE)
+unset(PROJECT_MINOR_VERSION CACHE)
+unset(PROJECT_PATCH_VERSION CACHE)
+unset(PROJECT_NAME CACHE)
 
 # Project information
 set(PRJ_NAME "helloworld" "Project name")
@@ -18,7 +17,7 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-project(${PRJ_NAME} VERSION ${PRJ_VERSION} LANGUAGES CXX)
+project(LANGUAGES CXX ${PRJ_NAME} VERSION ${PRJ_VERSION})
 message("PROJECT_NAME: ${PRJ_NAME} VERSION: ${PRJ_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
