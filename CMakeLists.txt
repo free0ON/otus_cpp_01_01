@@ -12,8 +12,10 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
+message("PROJECT_NAME: ${PRJ_NAME} VERSION: ${PRJ_VERSION}")
+
 project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH})
-message("PROJECT_NAME: ${PROJECT_NAME} VERSION: ${PROJECT_VERSION}")
+
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
 add_executable(${PRJ_NAME}_cli main.cpp)
