@@ -1,18 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
-message("PROJECT_NAME: ${PROJECT_NAME}")
-message("PROJECT_MAJOR_VERSION: ${PROJECT_MAJOR_VERSION}")
-message("PROJECT_MINOR_VERSION: ${PROJECT_MINOR_VERSION}")
-message("PROJECT_PATCH_VERSION: ${PROJECT_PATCH_VERSION}")
-
-#unset(PROJECT_VERSION CACHE)
-#unset(PROJECT_MAJOR_VERSION CACHE)
-#unset(PROJECT_MINOR_VERSION CACHE)
-#unset(PROJECT_PATCH_VERSION CACHE)
-#unset(PROJECT_NAME CACHE)
-
 # Project information
 set(PRJ_NAME "helloworld" "Project name")
-set(PRJ_VERSION "0.0.1" "Project version")
+set(PRJ_VERSION_MAJOR "0" "Project version major")
+set(PRJ_VERSION_MINOR "0" "Project version minor")
+set(PRJ_VERSION_PATCH "1" "Project version patch")
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" "Email contact")
 
 # Test options
@@ -20,7 +11,7 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-project(${PRJ_NAME} VERSION ${PROJECT_VERSION})
+project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH})
 message("PROJECT_NAME: ${PROJECT_NAME} VERSION: ${PROJECT_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
