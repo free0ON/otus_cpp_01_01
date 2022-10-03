@@ -39,7 +39,7 @@ if(BOOST_TEST)
     target_link_libraries(
         boost_test_version
         ${Boost_LIBRARIES}
-        ${PROJECT_NAME})
+        ${PRJ_NAME})
     enable_testing()
     add_test(boost_test_version boost_test_version)
     if (MSVC)
@@ -60,7 +60,7 @@ if(GOOGLE_TEST)
     target_link_libraries(
         google_test_version 
         gtest gtest_main 
-        ${PROJECT_NAME})
+        ${PRJ_NAME})
     #enable_testing()
     include(GoogleTest)
     add_test(google_test_version google_test_version)
@@ -82,7 +82,7 @@ if(CATCH2_TEST)
     target_link_libraries(
         catch2_test_version 
         PRIVATE Catch2::Catch2 Catch2::Catch2WithMain 
-        ${PROJECT_NAME})
+        ${PRJ_NAME})
     enable_testing()
     include(Catch)
     include(CTest)
