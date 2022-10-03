@@ -77,7 +77,7 @@ if(GOOGLE_TEST)
         google_test_version 
         gtest gtest_main 
         helloworld)
-    enable_testing()
+    #enable_testing()
     include(GoogleTest)
     add_test(google_test_version google_test_version)
     if (MSVC)
