@@ -67,7 +67,7 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-    enable_testing()
+
     find_package(GTest REQUIRED)
     add_executable(google_test_version google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
@@ -78,7 +78,8 @@ if(GOOGLE_TEST)
         google_test_version 
         gtest gtest_main 
         helloworld)
-    #include(GoogleTest)
+    include(GoogleTest)
+    enable_testing()
     add_test(google_test_version google_test_version)
     if (MSVC)
         target_compile_options(google_test_version PRIVATE  /W4)
