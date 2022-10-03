@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
 # Project innformation
-set(PRJ_NAME "helloworld" CACHE INTERNAL "Project name")
-set(PRJ_VERSION "0.0.1" CACHE INTERNAL "Project version")
-set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
+set(PRJ_NAME "helloworld" "Project name")
+set(PRJ_VERSION "0.0.1" "Project version")
+set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" "Email contact")
 
 # Test options
 option(BOOST_TEST "Boost test" ON)
