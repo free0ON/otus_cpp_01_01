@@ -4,7 +4,7 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-se(PROJECT_NAME "helloworld" CACHE INTERNAL "Project name")
+set(PROJECT_NAME "helloworld" CACHE INTERNAL "Project name")
 set(MAJOR_VERSION "0" CACHE INTERNAL "Minor version")
 set(MINOR_VERSION "0" CACHE INTERNAL "Major version")
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
