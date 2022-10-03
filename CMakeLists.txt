@@ -4,6 +4,7 @@ set(PRJ_NAME "helloworld" "Project name")
 set(PRJ_VERSION_MAJOR "0" "Project version major")
 set(PRJ_VERSION_MINOR "0" "Project version minor")
 set(PRJ_VERSION_PATCH "1" "Project version patch")
+set(PRJ_VERSION  ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH} "Project version")
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" "Email contact")
 
 # Test options
