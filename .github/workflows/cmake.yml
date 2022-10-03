@@ -7,6 +7,7 @@ env:
   BOOST_TEST: ON
   GOOGLE_TEST: ON
   CATCH2_TEST: ON
+  EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   
 on:
   push:
@@ -33,7 +34,7 @@ jobs:
           #git clone https://github.com/Microsoft/vcpkg.git
           #./vcpkg/bootstrap-vcpkg.sh
           #./vcpkg/vcpkg install catch2
-      - run: cmake . -DMINOR_VERSION=${{ env.MINOR_VERSION }} -DMINOR_VERSION=${{ env.MINOR_VERSION }} -DPATCH_VERSION=${{ env.PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
+      - run: cmake . -DMAJOR_VERSION=${{ env.MAJOR_VERSION }} -DMINOR_VERSION=${{ env.MINOR_VERSION }} -DPATCH_VERSION=${{ env.PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
