@@ -20,7 +20,7 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-project(helloworld VERSION 0.0.1)
+project(${PRJ_NAME} VERSION ${PROJECT_VERSION})
 message("PROJECT_NAME: ${PROJECT_NAME} VERSION: ${PROJECT_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
