@@ -12,7 +12,7 @@ set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
 set(PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 
 project(${PROJECT_NAME} PROJECT_VERSION ${PROJECT_VERSION})
-message("PROJECT_VERSION: ${PROJECT_VERSION}")
+message("PROJECT_NAME: ${PROJECT_NAME} PROJECT_VERSION: ${PROJECT_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PROJECT_NAME} lib.cpp)
 add_executable(${PROJECT_NAME}_cli main.cpp)
