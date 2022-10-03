@@ -15,7 +15,7 @@ on:
   push:
     branches:
       - master
-      - main
+      # - main
       - feature/github_actions
 
 jobs:
@@ -40,9 +40,9 @@ jobs:
           #./vcpkg/vcpkg install catch2
         if: env.CATCH2_TEST == 'ON'
       - run: cmake . -DPRJ_NAME= ${{ env.PRJ_NAME }} -DPRJ_VERSION_MAJOR= ${{ env.PRJ_VERSION_MAJOR }} -DPRJ_VERSION_MINOR= ${{ env.PRJ_VERSION_MINOR }} -DPRJ_VERSION_PATCH= ${{ env.PRJ_VERSION_PATCH }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
-      - run: cmake --build . -DPRJ_NAME= ${{ env.PRJ_NAME }} -DPRJ_VERSION_MAJOR= ${{ env.PRJ_VERSION_MAJOR }} -DPRJ_VERSION_MINOR= ${{ env.PRJ_VERSION_MINOR }} -DPRJ_VERSION_PATCH= ${{ env.PRJ_VERSION_PATCH }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
-      - run: cmake --build . --target test -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
-      - run: cmake --build . --target package ${{ env.PRJ_NAME }} -DPRJ_VERSION_MAJOR= ${{ env.PRJ_VERSION_MAJOR }} -DPRJ_VERSION_MINOR= ${{ env.PRJ_VERSION_MINOR }} -DPRJ_VERSION_PATCH= ${{ env.PRJ_VERSION_PATCH }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
+      - run: cmake --build . 
+      - run: cmake --build . --target test 
+      - run: cmake --build . --target package 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
