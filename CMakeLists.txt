@@ -1,32 +1,30 @@
 cmake_minimum_required(VERSION 3.2)
 
+# Project innformation
+set(PRJ_NAME "helloworld" CACHE INTERNAL "Project name")
+set(PRJ_VERSION "0.0.1" CACHE INTERNAL "Project version")
+set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
+
+# Test options
 option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-set(PROJECT_NAME "helloworld" CACHE INTERNAL "Project name")
-set(PROJECT_VERSION "0.0.1" CACHE INTERNAL "Project version")
-#set(PROJECT_MAJOR_VERSION "0" CACHE INTERNAL "Minor version")
-#set(PROJECT_MINOR_VERSION "0" CACHE INTERNAL "Major version")
-#set(PROJECT_PATCH_VERSION "1" CACHE INTERNAL "Patch version")
-set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
-#set(PROJECT_VERSION ${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION})
-
-project(${PROJECT_NAME} PROJECT_VERSION ${PROJECT_VERSION})
-message("PROJECT_NAME: ${PROJECT_NAME} PROJECT_VERSION: ${PROJECT_VERSION}")
+project(${PRJ_NAME} PROJECT_VERSION ${PRJ_VERSION})
+message("PROJECT_NAME: ${PRJ_NAME} PROJECT_VERSION: ${PRJ_VERSION}")
 configure_file(version.h.in version.h)
-add_library(${PROJECT_NAME} lib.cpp)
-add_executable(${PROJECT_NAME}_cli main.cpp)
-set_target_properties(${PROJECT_NAME}_cli ${PROJECT_NAME} PROPERTIES
+add_library(${PRJ_NAME} lib.cpp)
+add_executable(${PRJ_NAME}_cli main.cpp)
+set_target_properties(${PRJ_NAME}_cli ${PRJ_NAME} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
-target_include_directories(${PROJECT_NAME}
+target_include_directories(${PRJ_NAME}
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(${PROJECT_NAME}_cli PRIVATE
-    ${PROJECT_NAME}
+target_link_libraries(${PRJ_NAME}_cli PRIVATE
+    ${PRJ_NAME}
 )
 if(BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
@@ -99,22 +97,22 @@ if(CATCH2_TEST)
 endif(CATCH2_TEST)
 
 if (MSVC)
-    target_compile_options(${PROJECT_NAME}_cli PRIVATE
+    target_compile_options(${PRJ_NAME}_cli PRIVATE
         /W4
     )
-    target_compile_options(${PROJECT_NAME} PRIVATE
+    target_compile_options(${PRJ_NAME} PRIVATE
         /W4
     )
 else ()
-    target_compile_options(${PROJECT_NAME}_cli PRIVATE
+    target_compile_options(${PRJ_NAME}_cli PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-    target_compile_options(${PROJECT_NAME} PRIVATE
+    target_compile_options(${PRJ_NAME} PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif(MSVC)
 
-install(TARGETS ${PROJECT_NAME}_cli RUNTIME DESTINATION bin)
+install(TARGETS ${PRJ_NAME}_cli RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
