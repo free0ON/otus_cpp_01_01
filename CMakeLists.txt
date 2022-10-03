@@ -78,7 +78,7 @@ if(GOOGLE_TEST)
         google_test_version 
         gtest gtest_main 
         helloworld)
-    include(GoogleTest)
+    #include(GoogleTest)
     add_test(google_test_version google_test_version)
     if (MSVC)
         target_compile_options(google_test_version PRIVATE  /W4)
