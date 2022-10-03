@@ -74,10 +74,7 @@ jobs:
           asset_content_type: application/vnd.debian.binary-package
       - name: Download and Run program
         id: download-release-asset
-        uses: actions/checkout@v2
-        #env:
-          #RELEASE_DOWNLOAD_URL: "https://github.com/free0ON/otus_cpp_01_01/releases/download/115/helloworld-0.0.115-Linux.deb"
-          #"${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
+        uses: actions/upload-release-asset@v1
       - run: |
           wget "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
           sudo apt-get update && apt-get install -y ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb -y
