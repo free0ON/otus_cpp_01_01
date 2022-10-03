@@ -9,9 +9,9 @@ env:
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
 
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
-  BOOST_TEST: ON
-  GOOGLE_TEST: ON
-  CATCH2_TEST: ON
+  BOOST_TEST: OFF
+  GOOGLE_TEST: OFF
+  CATCH2_TEST: OFF
   
 on:
   push:
@@ -36,10 +36,6 @@ jobs:
           cd Catch2
           cmake -Bbuild -H. -DBUILD_TESTING=OFF
           sudo cmake --build build/ --target install
-          #sudo apt-get update -y
-          #git clone https://github.com/Microsoft/vcpkg.git
-          #./vcpkg/bootstrap-vcpkg.sh
-          #./vcpkg/vcpkg install catch2
         if: env.CATCH2_TEST == 'ON'
       - run: |
           cmake . -DPRJ_NAME=${{ env.PRJ_NAME }} \
@@ -81,7 +77,8 @@ jobs:
         env:
           RELEASE_DOWNLOAD_URL: "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
       - run: |
-          wget ${{ env.RELEASE_DOWNLOAD_URL }}
+          echo "${{ env.RELEASE_DOWNLOAD_URL }}"
+          wget "${{ env.RELEASE_DOWNLOAD_URL }}"
           cd Downloads
           apt update && apt install -y helloworld-0.0.X-Linux.deb -y
           helloworld_cli
