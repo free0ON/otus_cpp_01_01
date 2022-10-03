@@ -75,7 +75,7 @@ jobs:
           asset_path: ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb
           asset_name: ${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
-      - name: Download Install and Run program
+      - name: Download and Run program
         id: download-release-asset
         uses: actions/download-release-asset@v1
         env:
