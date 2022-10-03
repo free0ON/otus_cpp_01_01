@@ -1,12 +1,13 @@
 name: 'C++ CI'
 
 env:
-  PRJ_NAME: "New_project"
+  PRJ_NAME: "helloworld" # name without spases
   PRJ_VERSION_MAJOR: 0
   PRJ_VERSION_MINOR: 0 
   PRJ_VERSION_PATCH: ${{ github.run_number }}
   PRJ_DESCRIPTION: "Test program"
-  
+  PRJ_HOMEPAGE_URL: "$GITHUB_SERVER_URL\$GITHUB_REPOSITORY"
+
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
   GOOGLE_TEST: ON
@@ -45,8 +46,12 @@ jobs:
           -DPRJ_VERSION_MAJOR=${{ env.PRJ_VERSION_MAJOR }} \
           -DPRJ_VERSION_MINOR=${{ env.PRJ_VERSION_MINOR }} \
           -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
+          -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
+          -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
           -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
-          -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
+          -DBOOST_TEST=${{ env.BOOST_TEST }} \
+          -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
+          -DCATCH2_TEST=${{ env.CATCH2_TEST }}
       - run: cmake --build . 
       - run: cmake --build . --target test 
       - run: cmake --build . --target package 
