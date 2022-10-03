@@ -43,8 +43,7 @@ jobs:
           -DPRJ_VERSION_MINOR=${{ env.PRJ_VERSION_MINOR }} \
           -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
           -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
-          -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
-#         -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }} \
+          -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL \
           -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
           -DBOOST_TEST=${{ env.BOOST_TEST }} \
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
