@@ -2,11 +2,15 @@
 
 # Homework 01
 
-https://otus.ru/
+https://otus.ru/lessons/cpp-professional/
 
 https://youtu.be/LZwEtbc9gEA
 
 https://docs.github.com/en/actions/using-workflows
+
+https://cmake.org/cmake/help/latest/guide/tutorial/index.html
+
+https://git-scm.com/book/ru/v2
 
 # Project properties set by variables in cmake.yml
 
