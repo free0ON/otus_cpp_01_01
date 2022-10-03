@@ -5,18 +5,18 @@ option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
 set(PROJECT_NAME "helloworld" CACHE INTERNAL "Project name")
-set(MAJOR_VERSION "0" CACHE INTERNAL "Minor version")
-set(MINOR_VERSION "0" CACHE INTERNAL "Major version")
-set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
+set(PROJECT_MAJOR_VERSION "0" CACHE INTERNAL "Minor version")
+set(PROJECT_MINOR_VERSION "0" CACHE INTERNAL "Major version")
+set(PROJECT_PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
-set(PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
+set(PROJECT_VERSION ${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION})
 
 project(${PROJECT_NAME} PROJECT_VERSION ${PROJECT_VERSION})
 message("PROJECT_NAME: ${PROJECT_NAME} PROJECT_VERSION: ${PROJECT_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PROJECT_NAME} lib.cpp)
 add_executable(${PROJECT_NAME}_cli main.cpp)
-set_target_properties(${PROJECT_NAME}_cli helloworld PROPERTIES
+set_target_properties(${PROJECT_NAME}_cli ${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
