@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.2)
-
-# Project innformation
-set(PRJ_NAME "helloworld" "Project name")
-set(PRJ_VERSION "0.0.1" "Project version")
-set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" "Email contact")
 unset(PROJECT_VERSION)
 unset(PROJECT_MAJOR_VERSION)
 unset(PROJECT_MINOR_VERSION)
 unset(PROJECT_PATCH_VERSION)
 
 unset(PROJECT_NAME)
+
+# Project information
+set(PRJ_NAME "helloworld" "Project name")
+set(PRJ_VERSION "0.0.1" "Project version")
+set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" "Email contact")
+
 
 
 # Test options
