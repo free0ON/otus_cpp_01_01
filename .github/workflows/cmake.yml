@@ -5,8 +5,8 @@ env:
   PRJ_VERSION_MAJOR: 0
   PRJ_VERSION_MINOR: 0 
   PRJ_VERSION_PATCH: ${{ github.run_number }}
-  PRJ_DESCRIPTION: "Test_program" # description without spaces
-  PRJ_HOMEPAGE_URL: "${{ github.server_url }}\\${{ github.repository }}"
+  PRJ_DESCRIPTION: "Description_os_test_program" # description without spaces
+  PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
 
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
