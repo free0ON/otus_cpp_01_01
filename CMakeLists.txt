@@ -1,15 +1,13 @@
-cmake_minimum_required(VERSION 3.2)
+# CMake minimum version
+set(PRJ_CMAKE_MIN_VERSION 3.2 CACHE INTERNAL "CMake version")
+cmake_minimum_required(VERSION ${PRJ_CMAKE_MIN_VERSION})
 # Project information
-#set(PRJ_NAME "helloworld")
-#set(PRJ_VERSION_MAJOR "0")
-#set(PRJ_VERSION_MINOR "0")
-#set(PRJ_VERSION_PATCH "1")
-#set(PRJ_VERSION  ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH})
-#set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru")
 set(PRJ_NAME "helloworld" CACHE INTERNAL "Project name")
 set(PRJ_VERSION_MAJOR "0" CACHE INTERNAL "Minor version")
 set(PRJ_VERSION_MINOR "0" CACHE INTERNAL "Major version")
 set(PRJ_VERSION_PATCH "1" CACHE INTERNAL "Patch version")
+set(PRJ_DESCRIPTION "Helloworld project" CACHE INTERNAL "Project description")
+set(PRJ_HOMEPAGE_URL "https://github.com/free0ON/otus_cpp_01_01" CACHE INTERNAL "Project URL")
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
 
 # Test options
@@ -17,11 +15,12 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-message("PROJECT_NAME: ${PRJ_NAME} VERSION: ${PRJ_VERSION}")
-message("PROJECT_VERSION_MAJOR: ${PROJECT_VERSION_MAJOR}")
-message("PROJECT_VERSION_MINOR: ${PROJECT_VERSION_MINOR}")
-message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
-project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH})
+project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH} DESCRIPTION "${PRJ_DESCRIPTION}" HOMEPAGE_URL "${PRJ_HOMEPAGE_URL}")
+message("PROJECT_NAME: ${PROJECT_NAME} VERSION: ${PROJECT_VERSION}")
+message("BOOST_TEST: ${BOOST_TEST} GOOGLE_TEST: ${GOOGLE_TEST} CATCH2_TEST: ${CATCH2_TEST}")
+message("DESCRIPTION: ${PRJ_DESCRIPTION}")
+message("HOMEPAGE_URL: ${PRJ_HOMEPAGE_URL}")
+message("CMAKE_MINIMUM_REQUIRED_VERSION: ${CMAKE_MINIMUM_REQUIRED_VERSION}")
 
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
