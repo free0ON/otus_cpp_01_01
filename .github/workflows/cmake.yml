@@ -7,7 +7,7 @@ env:
   PRJ_VERSION_PATCH: ${{ github.run_number }}
   PRJ_DESCRIPTION: "Description_of_test_program" # description without spaces
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
-
+. PRJ_CMAKE_MIN_VERSION: 3.2
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
   GOOGLE_TEST: ON
@@ -44,6 +44,7 @@ jobs:
           -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
           -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
           -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
+.         -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }} \
           -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
           -DBOOST_TEST=${{ env.BOOST_TEST }} \
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
