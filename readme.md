@@ -1,22 +1,34 @@
-Otus C++ Developer 09 2022 ci/cd test farm
+# Otus C++ Developer 09 2022 ci/cd test farm
 
-Homework 01
+# Homework 01
+
 https://otus.ru/
+
 https://youtu.be/LZwEtbc9gEA
+
 https://docs.github.com/en/actions/using-workflows
 
-Project properties set by variables in cmake.yml
+# Project properties set by variables in cmake.yml
 
-PRJ_NAME: - Project name without spaces
+PRJ_NAME: Project name without spaces
+
 PRJ_VERSION_MAJOR: Project magor version
+
 PRJ_VERSION_MINOR: Project minor version
-PRJ_VERSION_PATCH: Prokect patch version used as ${{ github.run_number }}
+
+PRJ_VERSION_PATCH: Project patch version used as ${{ github.run_number }}
+
 PRJ_DESCRIPTION: Peoject description without spaces
+
 PRJ_HOMEPAGE_URL: Progect homepage
+
 EMAIL_CONTACT: Email for notification
+
 # Test options ON/OFF
-BOOST_TEST: ON
+BOOST_TEST: ON 
+
 GOOGLE_TEST: ON
+
 CATCH2_TEST: ON
 
 Задание 1
