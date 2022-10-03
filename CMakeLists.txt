@@ -4,48 +4,28 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
+se(PROJECT_NAME "helloworld" CACHE INTERNAL "Project name")
 set(MAJOR_VERSION "0" CACHE INTERNAL "Minor version")
 set(MINOR_VERSION "0" CACHE INTERNAL "Major version")
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
+set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
+set(PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 
-message("PATCH_VERSION: ${PATCH_VERSION}")
-set(PROJECT_VESRION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
-message("PROJECT_VESRION: ${PROJECT_VESRION}")
-
-if (GITHUB_RUN_NUMBER)
-	project(helloworld VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
-else()
-	project(helloworld VERSION ${PROJECT_VESRION})
-endif()
-
-message("PROJECT_VERSION_MAJOR: ${PROJECT_VERSION_MAJOR}")
-message("PROJECT_VERSION_MINOR: ${PROJECT_VERSION_MINOR}")
-message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
-
-
-#if (GITHUB_RUN_NUMBER)
-#	project(helloworld VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
-#	message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
-#else()
-#	project(helloworld VERSION ${PROJECT_VESRION})
-#	message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
-#endif(GITHUB_RUN_NUMBER)
-
-project(helloworld VERSION ${PROJECT_VESRION})
-message("PROJECT_VERSION_PATCH: ${PROJECT_VERSION_PATCH}")
+project(${PROJECT_NAME} PROJECT_VERSION ${PROJECT_VERSION})
+message("PROJECT_VERSION: ${PROJECT_VERSION}")
 configure_file(version.h.in version.h)
-add_library(helloworld lib.cpp)
-add_executable(helloworld_cli main.cpp)
-set_target_properties(helloworld_cli helloworld PROPERTIES
+add_library(${PROJECT_NAME} lib.cpp)
+add_executable(${PROJECT_NAME}_cli main.cpp)
+set_target_properties(${PROJECT_NAME}_cli helloworld PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
-target_include_directories(helloworld
+target_include_directories(${PROJECT_NAME}
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(helloworld_cli PRIVATE
-    helloworld
+target_link_libraries(${PROJECT_NAME}_cli PRIVATE
+    ${PROJECT_NAME}
 )
 if(BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
@@ -60,7 +40,7 @@ if(BOOST_TEST)
     target_link_libraries(
         boost_test_version
         ${Boost_LIBRARIES}
-        helloworld)
+        ${PROJECT_NAME})
     enable_testing()
     add_test(boost_test_version boost_test_version)
     if (MSVC)
@@ -81,7 +61,7 @@ if(GOOGLE_TEST)
     target_link_libraries(
         google_test_version 
         gtest gtest_main 
-        helloworld)
+        ${PROJECT_NAME})
     #enable_testing()
     include(GoogleTest)
     add_test(google_test_version google_test_version)
@@ -103,7 +83,7 @@ if(CATCH2_TEST)
     target_link_libraries(
         catch2_test_version 
         PRIVATE Catch2::Catch2 Catch2::Catch2WithMain 
-        helloworld)
+        ${PROJECT_NAME})
     enable_testing()
     include(Catch)
     include(CTest)
@@ -118,38 +98,28 @@ if(CATCH2_TEST)
 endif(CATCH2_TEST)
 
 if (MSVC)
-    target_compile_options(helloworld_cli PRIVATE
+    target_compile_options(${PROJECT_NAME}_cli PRIVATE
         /W4
     )
-    target_compile_options(helloworld PRIVATE
-        /W4
-    )
-    target_compile_options(boost_test_version PRIVATE
-        /W4
-    )
-    target_compile_options(google_test_version PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE
         /W4
     )
 else ()
-    target_compile_options(helloworld_cli PRIVATE
+    target_compile_options(${PROJECT_NAME}_cli PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-    target_compile_options(helloworld PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
+endif(MSVC)
 
-
-endif()
-
-
-
-install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME}_cli RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-set(CPACK_PACKAGE_CONTACT dmitrii.lozovoi@yandex.ru)
+set(CPACK_PACKAGE_CONTACT "${EMAIL_CONTACT}")
 
 include(CPack)
