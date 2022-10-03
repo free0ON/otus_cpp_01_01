@@ -3,9 +3,9 @@ name: 'C++ CI'
 env:
   PRJ_NAME: "helloworld" # name without spaces
   PRJ_VERSION_MAJOR: 0
-  PRJ_VERSION_MINOR: 0 
+  PRJ_VERSION_MINOR: 1
   PRJ_VERSION_PATCH: ${{ github.run_number }}
-  PRJ_DESCRIPTION: "Description_os_test_program" # description without spaces
+  PRJ_DESCRIPTION: "Description_of_test_program" # description without spaces
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
 
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
