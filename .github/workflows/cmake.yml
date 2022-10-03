@@ -1,11 +1,11 @@
 name: 'C++ CI'
 
 env:
-  PRJ_NAME: New project
+  PRJ_NAME: "New project"
   PRJ_VERSION_MAJOR: 0
   PRJ_VERSION_MINOR: 0 
   PRJ_VERSION_PATCH: ${{ github.run_number }}
-  PRJ_DESCRIPTION: Test program
+  PRJ_DESCRIPTION: "Test program"
   
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
