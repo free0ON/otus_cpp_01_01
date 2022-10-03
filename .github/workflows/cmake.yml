@@ -34,7 +34,7 @@ jobs:
           #git clone https://github.com/Microsoft/vcpkg.git
           #./vcpkg/bootstrap-vcpkg.sh
           #./vcpkg/vcpkg install catch2
-      - run: cmake . -DPROJECT_MAJOR_VERSION=${{ env.PROJECT_MAJOR_VERSION }} -DPROJECT_MINOR_VERSION=${{ env.PROJECT_MINOR_VERSION }} -DPROJECT_PATCH_VERSION=${{ env.PROJECT_PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
+      - run: cmake . -DPROJECT_VERSION=${{ env.PROJECT_MAJOR_VERSION }}.${{ env.PROJECT_MINOR_VERSION }}.${{ env.PROJECT_PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }} -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }}
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
