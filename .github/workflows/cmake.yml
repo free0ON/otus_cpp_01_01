@@ -9,19 +9,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
+      - name: Install library
       - uses: actions/checkout@v2
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
       - run: sudo apt-get update && sudo apt-get install googletest -y
-      - run: sudo apt-get update -y
-      - run: git clone https://github.com/Microsoft/vcpkg.git
-      - run: ./vcpkg/bootstrap-vcpkg.sh
-      - run: ./vcpkg/vcpkg install catch2
-      - run: cd /home
-      
+      - run: |
+          sudo apt-get update -y
+          git clone https://github.com/Microsoft/vcpkg.git
+          ./vcpkg/bootstrap-vcpkg.sh
+          ./vcpkg/vcpkg install catch2
+          cd /home
+      - name: Cmake build
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DBOOST_TEST=ON -DGOOGLE_TEST=ON -DCATCH2_TEST=ON
       - run: cmake --build .
       - run: cmake --build . --target test
