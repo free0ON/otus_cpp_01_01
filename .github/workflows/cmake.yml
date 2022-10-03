@@ -23,9 +23,9 @@ jobs:
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-        if: ${{ env.BOOST_TEST == ON }}
+        if: ${{ env.BOOST_TEST == "ON" }}
       - run: sudo apt-get update && sudo apt-get install libgtest-dev -y
-        if: ${{ env.GOOGLE_TEST == ON }}
+        if: ${{ env.GOOGLE_TEST == "ON" }}
       - run: |
           git clone https://github.com/catchorg/Catch2
           cd Catch2
@@ -35,7 +35,7 @@ jobs:
           #git clone https://github.com/Microsoft/vcpkg.git
           #./vcpkg/bootstrap-vcpkg.sh
           #./vcpkg/vcpkg install catch2
-        if: ${{ env.CATCH2_TEST == ON }}
+        if: ${{ env.CATCH2_TEST == "ON" }}
       - run: cmake . -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
       - run: cmake --build .
       - run: cmake --build . --target test
