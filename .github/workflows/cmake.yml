@@ -1,6 +1,9 @@
 name: 'C++ CI'
 env:
   PROJECT_NAME: helloworld
+  MAJOR_VERSION: 0
+  MINOR_VERSION: 0
+  PATCH_VERSION: github.run_number
   BOOST_TEST: ON
   GOOGLE_TEST: ON
   CATCH2_TEST: ON
@@ -14,7 +17,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -30,7 +33,7 @@ jobs:
           #git clone https://github.com/Microsoft/vcpkg.git
           #./vcpkg/bootstrap-vcpkg.sh
           #./vcpkg/vcpkg install catch2
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
+      - run: cmake . -DPATCH_VERSION=${{ env.PATCH_VERSION }} -DBOOST_TEST=${{ env.BOOST_TEST }} -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} -DCATCH2_TEST=${{ env.CATCH2_TEST }}
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
@@ -51,6 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./${{ env.PROJECT_NAME }}-${{ env.MAJOR_VERSION}}.${{ env.MINOR_VERSION}}.${{ env.PATCH_VERSION}}-Linux.deb
+          asset_name: ${{ env.PROJECT_NAME }}-${{ env.MAJOR_VERSION}}.${{ env.MINOR_VERSION}}.${{ env.PATCH_VERSION }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
