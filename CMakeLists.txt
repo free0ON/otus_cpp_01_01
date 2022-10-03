@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 
 option(BOOST_TEST "Boost test" ON)
-option(GOOGLE_TEST "Google test" ON)
-option(CATCH2_TEST "Catch2 test" ON)
+option(GOOGLE_TEST "Google test" OFF)
+option(CATCH2_TEST "Catch2 test" OFF)
 
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 message("PATCH_VERSION: ${PATCH_VERSION}")
@@ -67,7 +67,6 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-
     find_package(GTest REQUIRED)
     add_executable(google_test_version google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
@@ -78,8 +77,8 @@ if(GOOGLE_TEST)
         google_test_version 
         gtest gtest_main 
         helloworld)
-    include(GoogleTest)
     enable_testing()
+    include(GoogleTest)
     add_test(google_test_version google_test_version)
     if (MSVC)
         target_compile_options(google_test_version PRIVATE  /W4)
