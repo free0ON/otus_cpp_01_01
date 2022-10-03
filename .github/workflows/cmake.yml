@@ -6,7 +6,7 @@ env:
   PRJ_VERSION_MINOR: 0 
   PRJ_VERSION_PATCH: ${{ github.run_number }}
   PRJ_DESCRIPTION: "Test program"
-  PRJ_HOMEPAGE_URL: "$GITHUB_SERVER_URL\$GITHUB_REPOSITORY"
+  PRJ_HOMEPAGE_URL: "${{ env.GITHUB_SERVER_URL }}\${{ env.GITHUB_REPOSITORY }}"
 
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
