@@ -75,7 +75,7 @@ jobs:
       - name: Download and Run program
         id: download-release-asset
         uses: actions/checkout@main
-      - run: |
-          sudo wget "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
-          sudo apt-get update && apt-get install -y ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb -y
-          sudo ${{ env.PRJ_NAME }}_cli
+        - run: |
+            sudo wget "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
+            sudo apt-get update && apt-get install -y ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb -y
+            sudo ${{ env.PRJ_NAME }}_cli
