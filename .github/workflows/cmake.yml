@@ -15,7 +15,7 @@ on:
   push:
     branches:
       - master
-      # - main
+      - main
       - feature/github_actions
 
 jobs:
