@@ -17,7 +17,7 @@ option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" OFF)
 option(CATCH2_TEST "Catch2 test" OFF)
 
-project(LANGUAGES CXX ${PRJ_NAME} VERSION ${PRJ_VERSION})
+project(${PRJ_NAME} VERSION ${PRJ_VERSION} DESCRIPTION "Test project" LANGUAGES CXX)
 message("PROJECT_NAME: ${PRJ_NAME} VERSION: ${PRJ_VERSION}")
 configure_file(version.h.in version.h)
 add_library(${PRJ_NAME} lib.cpp)
