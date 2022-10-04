@@ -19,17 +19,11 @@ on:
       - master
       - main
       - feature/github_actions
-  teg:
-    branches:
-      - master
-      - main
-      - feature/github_actions
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - run-name: Install lib
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -51,23 +45,16 @@ jobs:
           -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
           -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
           -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
-          -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }S} \
+          -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }} \
           -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
           -DBOOST_TEST=${{ env.BOOST_TEST }} \
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
           -DCATCH2_TEST=${{ env.CATCH2_TEST }}
-
-      - run-name: Build 
-        - run: cmake --build . 
-
-      - run-name: Test
-        - run: cmake --build . --target test 
-      if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
-
-      - run-name: Build Package
-        - run: cmake --build . --target package 
-
-      - run-name: Create Release
+      - run: cmake --build . 
+      - run: cmake --build . --target test 
+        if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
+      - run: cmake --build . --target package 
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -77,7 +64,6 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
-
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
