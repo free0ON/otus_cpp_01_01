@@ -9,9 +9,9 @@ env:
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
   PRJ_CMAKE_MIN_VERSION: 3.2
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
-  BOOST_TEST: ON
+  BOOST_TEST: OFF
   GOOGLE_TEST: ON
-  CATCH2_TEST: ON
+  CATCH2_TEST: OFF
   
 on:
   push:
@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -49,7 +49,8 @@ jobs:
           -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
           -DBOOST_TEST=${{ env.BOOST_TEST }} \
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
-          -DCATCH2_TEST=${{ env.CATCH2_TEST }}
+          -DCATCH2_TEST=${{ env.CATCH2_TEST }} \
+          -DGTEST_HAS_PTHREAD=1
       - run: cmake --build . 
       - run: cmake --build . --target test 
         if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
