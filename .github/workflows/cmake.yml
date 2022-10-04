@@ -19,41 +19,54 @@ on:
       - master
       - main
       - feature/github_actions
+  teg:
+    branches:
+      - master
+      - main
+      - feature/github_actions
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-        if: env.BOOST_TEST == 'ON'
-      - run: |
-          sudo apt-get update && sudo apt-get install && sudo apt-get install libgtest-dev -y
-        if: env.GOOGLE_TEST == 'ON'
-      - run: |
-          git clone https://github.com/catchorg/Catch2
-          cd Catch2
-          cmake -Bbuild -H. -DBUILD_TESTING=OFF
-          sudo cmake --build build --target install
-        if: env.CATCH2_TEST == 'ON'
-      - run: |
-          cmake . -DPRJ_NAME=${{ env.PRJ_NAME }} \
-          -DPRJ_VERSION_MAJOR=${{ env.PRJ_VERSION_MAJOR }} \
-          -DPRJ_VERSION_MINOR=${{ env.PRJ_VERSION_MINOR }} \
-          -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
-          -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
-          -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
-          -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }} \
-          -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
-          -DBOOST_TEST=${{ env.BOOST_TEST }} \
-          -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
-          -DCATCH2_TEST=${{ env.CATCH2_TEST }}
-      - run: cmake --build . 
-      - run: cmake --build . --target test 
-        if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
-      - run: cmake --build . --target package 
+      - name: Install lib
+        - uses: actions/checkout@v2
+          with:
+            submodules: true
+        - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
+          if: env.BOOST_TEST == 'ON'
+        - run: |
+            sudo apt-get update && sudo apt-get install && sudo apt-get install libgtest-dev -y
+          if: env.GOOGLE_TEST == 'ON'
+        - run: |
+            git clone https://github.com/catchorg/Catch2
+            cd Catch2
+            cmake -Bbuild -H. -DBUILD_TESTING=OFF
+            sudo cmake --build build --target install
+          if: env.CATCH2_TEST == 'ON'
+        - run: |
+            cmake . -DPRJ_NAME=${{ env.PRJ_NAME }} \
+            -DPRJ_VERSION_MAJOR=${{ env.PRJ_VERSION_MAJOR }} \
+            -DPRJ_VERSION_MINOR=${{ env.PRJ_VERSION_MINOR }} \
+            -DPRJ_VERSION_PATCH=${{ env.PRJ_VERSION_PATCH }} \
+            -DPRJ_DESCRIPTION=${{ env.PRJ_DESCRIPTION }} \
+            -DPRJ_HOMEPAGE_URL=${{ env.PRJ_HOMEPAGE_URL }} \
+            -DPRJ_CMAKE_MIN_VERSION=${{ env.PRJ_CMAKE_MIN_VERSION }S} \
+            -DEMAIL_CONTACT=${{ env.EMAIL_CONTACT }} \
+            -DBOOST_TEST=${{ env.BOOST_TEST }} \
+            -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
+            -DCATCH2_TEST=${{ env.CATCH2_TEST }}
+
+      - name: Build 
+        - run: cmake --build . 
+
+      - name: Test
+        - run: cmake --build . --target test 
+      if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
+
+      - name: Build Package
+        - run: cmake --build . --target package 
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -64,6 +77,7 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
+
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -74,10 +88,3 @@ jobs:
           asset_path: ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb
           asset_name: ${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
-      #- name: Download and Run program
-      #  id: download-release-asset
-      #  uses: actions/checkout@main
-      #- run: |
-      #  sudo wget "${{ env.PRJ_HOMEPAGE_URL }}//releases//download//${{ github.run_number }}//${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH}}-Linux.deb"
-      #  sudo apt-get update && apt-get install -y ./${{ env.PRJ_NAME }}-${{ env.PRJ_VERSION_MAJOR}}.${{ env.PRJ_VERSION_MINOR}}.${{ env.PRJ_VERSION_PATCH }}-Linux.deb -y
-      #  sudo ${{ env.PRJ_NAME }}_cli
