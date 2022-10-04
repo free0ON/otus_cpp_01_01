@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -50,7 +50,7 @@ jobs:
           -DBOOST_TEST=${{ env.BOOST_TEST }} \
           -DGOOGLE_TEST=${{ env.GOOGLE_TEST }} \
           -DCATCH2_TEST=${{ env.CATCH2_TEST }} \
-          -DGTEST_HAS_PTHREAD=1
+          -DGTEST_HAS_PTHREAD=0
       - run: cmake --build . 
       - run: cmake --build . --target test 
         if: (env.BOOST_TEST == 'ON') || (env.GOOGLE_TEST == 'ON') || (env.CATCH2_TEST == 'ON')  
