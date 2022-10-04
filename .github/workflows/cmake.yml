@@ -35,7 +35,7 @@ jobs:
           git clone https://github.com/catchorg/Catch2
           cd Catch2
           cmake -Bbuild -H. -DBUILD_TESTING=OFF
-          sudo cmake --build build/ --target install
+          sudo cmake --build build --target install
         if: env.CATCH2_TEST == 'ON'
       - run: |
           cmake . -DPRJ_NAME=${{ env.PRJ_NAME }} \
