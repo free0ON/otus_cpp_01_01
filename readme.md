@@ -28,6 +28,8 @@ PRJ_DESCRIPTION: Peoject description without spaces
 
 PRJ_HOMEPAGE_URL: Progect homepage
 
+PRJ_CMAKE_MIN_VERSION: CMake minimum version required
+
 EMAIL_CONTACT: Email for notification
 
 # Test options ON/OFF
