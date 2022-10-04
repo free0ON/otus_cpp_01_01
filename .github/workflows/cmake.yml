@@ -29,7 +29,7 @@ jobs:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
         if: env.BOOST_TEST == 'ON'
-      - run: sudo apt-get update && sudo apt-get install libgtest-dev -y
+      - run: sudo apt-get update && sudo apt-get install libgtest-dev=1.10.0-2 -y
         if: env.GOOGLE_TEST == 'ON'
       - run: |
           git clone https://github.com/catchorg/Catch2
