@@ -61,6 +61,8 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
+    set(TREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Treads REQUIRED)
     find_package(GTest REQUIRED)
     add_executable(google_test_version google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
@@ -68,9 +70,14 @@ if(GOOGLE_TEST)
         CXX_STANDARD_REQUIRED ON
     )
     target_link_libraries(
-        google_test_version 
-        gtest gtest_main 
-        ${PRJ_NAME})
+        google_test_version
+        PRIVATE
+        #gtest 
+        #gtest_main 
+        ${PRJ_NAME}
+        ${GTEST_BOTH_LIBRARES}
+        ${CMAKE_THREAD_LIBS_INIT}
+        )
     enable_testing()
     include(GoogleTest)
     add_test(google_test_version google_test_version)
