@@ -10,7 +10,7 @@ env:
   PRJ_CMAKE_MIN_VERSION: 3.2
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
   BOOST_TEST: ON
-  GOOGLE_TEST: OFF
+  GOOGLE_TEST: ON
   CATCH2_TEST: ON
   
 on:
