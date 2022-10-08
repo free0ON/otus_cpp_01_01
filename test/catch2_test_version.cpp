@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "../lib/lib.h"
 
 #include <catch2/catch_test_macros.hpp>
 

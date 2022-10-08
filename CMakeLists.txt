@@ -22,9 +22,9 @@ message("DESCRIPTION: ${PRJ_DESCRIPTION}")
 message("HOMEPAGE_URL: ${PRJ_HOMEPAGE_URL}")
 message("CMAKE_MINIMUM_REQUIRED_VERSION: ${CMAKE_MINIMUM_REQUIRED_VERSION}")
 
-configure_file(version.h.in version.h)
-add_library(${PRJ_NAME} lib.cpp)
-add_executable(${PRJ_NAME}_cli main.cpp)
+configure_file(lib/version.h.in version.h)
+add_library(${PRJ_NAME} lib/lib.cpp)
+add_executable(${PRJ_NAME}_cli src/main.cpp)
 set_target_properties(${PRJ_NAME}_cli ${PRJ_NAME} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
@@ -38,7 +38,7 @@ target_link_libraries(${PRJ_NAME}_cli PRIVATE
 )
 if(BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-    add_executable(boost_test_version test_version.cpp)
+    add_executable(boost_test_version test/test_version.cpp)
     set_target_properties( boost_test_version PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
@@ -64,7 +64,7 @@ if(GOOGLE_TEST)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
     find_package(GTest REQUIRED)
-    add_executable(google_test_version google_test_version.cpp)
+    add_executable(google_test_version test/google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
@@ -76,7 +76,7 @@ if(GOOGLE_TEST)
         #gtest_main 
         ${PRJ_NAME}
         ${GTEST_BOTH_LIBRARES}
-        ${CMAKE_THREAD_LIBS_INIT}
+#        ${CMAKE_THREAD_LIBS_INIT}
         )
     enable_testing()
     include(GoogleTest)
@@ -91,7 +91,7 @@ if(GOOGLE_TEST)
 endif(GOOGLE_TEST)
 if(CATCH2_TEST)
     find_package(Catch2 REQUIRED)
-    add_executable(catch2_test_version catch2_test_version.cpp)
+    add_executable(catch2_test_version test/catch2_test_version.cpp)
     set_target_properties(catch2_test_version PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
