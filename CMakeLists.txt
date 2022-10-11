@@ -61,7 +61,7 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    #set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
     find_package(GTest REQUIRED)
     add_executable(google_test_version test/google_test_version.cpp)
@@ -75,7 +75,7 @@ if(GOOGLE_TEST)
         gtest
         gtest_main
         ${PRJ_NAME}
-        #${CMAKE_THREAD_LIBS_INIT}
+        ${CMAKE_THREAD_LIBS_INIT}
         )
     enable_testing()
     include(GoogleTest)
