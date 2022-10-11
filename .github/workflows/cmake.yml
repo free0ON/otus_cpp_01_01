@@ -33,8 +33,9 @@ jobs:
           sudo apt-get update && sudo apt-get install libgtest-dev -y
           cd /usr/src/gtest
           sudo cmake CMakeLists.txt
-          sudo cmake --build . 
-          # sudo cp *.a /usr/lib
+          sudo make
+          # sudo cmake --build . 
+          sudo cp *.a /usr/lib
         if: env.GOOGLE_TEST == 'ON'
       - run: |
           git clone https://github.com/catchorg/Catch2
