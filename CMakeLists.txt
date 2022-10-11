@@ -11,9 +11,9 @@ set(PRJ_HOMEPAGE_URL "https://github.com/free0ON/otus_cpp_01_01" CACHE INTERNAL 
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
 
 # Test options
-option(BOOST_TEST "Boost test" OFF)
+option(BOOST_TEST "Boost test" ON)
 option(GOOGLE_TEST "Google test" ON)
-option(CATCH2_TEST "Catch2 test" OFF)
+option(CATCH2_TEST "Catch2 test" ON)
 
 project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH} DESCRIPTION "${PRJ_DESCRIPTION}" HOMEPAGE_URL "${PRJ_HOMEPAGE_URL}")
 message("PROJECT_NAME: ${PROJECT_NAME} VERSION: ${PROJECT_VERSION}")
@@ -46,7 +46,7 @@ if(BOOST_TEST)
     )
     set_target_properties(
         boost_test_version PROPERTIES
-        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK)   
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK)
     target_link_libraries(
         boost_test_version
         ${Boost_LIBRARIES}
@@ -71,7 +71,6 @@ if(GOOGLE_TEST)
         CXX_STANDARD_REQUIRED ON
     )
     target_link_libraries(
-
         google_test_version
         PRIVATE
         gtest
