@@ -62,14 +62,16 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-    #find_package(Threads REQUIRED)
-    #find_package(GTest REQUIRED)
+    set(THREADS_PREFER_PTHREADS_FLAG ON)
+    find_package(Threads REQUIRED)
+    find_package(GTest REQUIRED)
     add_executable(google_test_version test/google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
     )
     target_link_libraries(
+
         google_test_version
         PRIVATE
         gtest
