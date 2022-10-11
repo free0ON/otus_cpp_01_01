@@ -62,7 +62,7 @@ if(BOOST_TEST)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
     #set(THREADS_PREFER_PTHREAD_FLAG ON)
-    find_package(Threads REQUIRED)
+    #find_package(Threads REQUIRED)
     find_package(GTest REQUIRED)
     add_executable(google_test_version test/google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
