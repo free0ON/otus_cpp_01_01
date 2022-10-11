@@ -9,9 +9,9 @@ env:
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
   PRJ_CMAKE_MIN_VERSION: 3.3
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
-  BOOST_TEST: OFF
+  BOOST_TEST: ON
   GOOGLE_TEST: ON
-  CATCH2_TEST: OFF
+  CATCH2_TEST: ON
   
 on:
   push:
@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:

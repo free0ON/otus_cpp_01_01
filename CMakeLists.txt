@@ -37,6 +37,7 @@ target_link_libraries(${PRJ_NAME}_cli PRIVATE
     ${PRJ_NAME}
 )
 if(BOOST_TEST)
+
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(boost_test_version test/test_version.cpp)
     set_target_properties(boost_test_version PROPERTIES
@@ -61,8 +62,7 @@ if(BOOST_TEST)
     endif(MSVC)
 endif(BOOST_TEST)
 if(GOOGLE_TEST)
-    #set(THREADS_PREFER_PTHREAD_FLAG ON)
-    #find_package(Threads REQUIRED)
+    find_package(Threads REQUIRED)
     find_package(GTest REQUIRED)
     add_executable(google_test_version test/google_test_version.cpp)
     set_target_properties(google_test_version PROPERTIES
