@@ -75,7 +75,7 @@ if(GOOGLE_TEST)
         gtest
         gtest_main
         ${PRJ_NAME}
-        ${CMAKE_THREAD_LIBS_INIT}
+        #${CMAKE_THREAD_LIBS_INIT}
         )
     enable_testing()
     include(GoogleTest)
