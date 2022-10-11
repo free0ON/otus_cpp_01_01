@@ -7,11 +7,11 @@ env:
   PRJ_VERSION_PATCH: ${{ github.run_number }}
   PRJ_DESCRIPTION: "Description_of_test_program" # description without spaces
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
-  PRJ_CMAKE_MIN_VERSION: 3.2
+  PRJ_CMAKE_MIN_VERSION: 3.3
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
-  BOOST_TEST: ON
-  GOOGLE_TEST: OFF
-  CATCH2_TEST: ON
+  BOOST_TEST: OFF
+  GOOGLE_TEST: ON
+  CATCH2_TEST: OFF
   
 on:
   push:

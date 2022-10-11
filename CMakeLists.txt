@@ -11,8 +11,8 @@ set(PRJ_HOMEPAGE_URL "https://github.com/free0ON/otus_cpp_01_01" CACHE INTERNAL 
 set(EMAIL_CONTACT "dmitrii.lozovoi@yandex.ru" CACHE INTERNAL "Email contact")
 
 # Test options
-option(BOOST_TEST "Boost test" ON)
-option(GOOGLE_TEST "Google test" OFF)
+option(BOOST_TEST "Boost test" OFF)
+option(GOOGLE_TEST "Google test" ON)
 option(CATCH2_TEST "Catch2 test" OFF)
 
 project(${PRJ_NAME} VERSION ${PRJ_VERSION_MAJOR}.${PRJ_VERSION_MINOR}.${PRJ_VERSION_PATCH} DESCRIPTION "${PRJ_DESCRIPTION}" HOMEPAGE_URL "${PRJ_HOMEPAGE_URL}")
@@ -39,7 +39,7 @@ target_link_libraries(${PRJ_NAME}_cli PRIVATE
 if(BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(boost_test_version test/test_version.cpp)
-    set_target_properties( boost_test_version PROPERTIES
+    set_target_properties(boost_test_version PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
     )
@@ -72,11 +72,10 @@ if(GOOGLE_TEST)
     target_link_libraries(
         google_test_version
         PRIVATE
-        #gtest 
-        #gtest_main 
+        gtest
+        gtest_main
         ${PRJ_NAME}
-        ${GTEST_BOTH_LIBRARES}
-#        ${CMAKE_THREAD_LIBS_INIT}
+        ${CMAKE_THREAD_LIBS_INIT}
         )
     enable_testing()
     include(GoogleTest)
