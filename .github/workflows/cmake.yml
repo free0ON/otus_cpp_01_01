@@ -9,9 +9,9 @@ env:
   PRJ_HOMEPAGE_URL: "${{ github.server_url }}//${{ github.repository }}"
   PRJ_CMAKE_MIN_VERSION: 3.3
   EMAIL_CONTACT: dmitrii.lozovoi@yandex.ru
-  BOOST_TEST: ON
+  BOOST_TEST: OFF
   GOOGLE_TEST: ON
-  CATCH2_TEST: ON
+  CATCH2_TEST: OFF
   
 on:
   push:
@@ -33,8 +33,9 @@ jobs:
           sudo apt-get update && sudo apt-get install libgtest-dev -y
           cd /usr/src/gtest
           sudo cmake CMakeLists.txt
-          sudo make
-          # sudo cmake --build . 
+          # sudo make
+          sudo cmake --build . --target install
+          # sudo cmake 
           # sudo cp *.a /usr/lib
         if: env.GOOGLE_TEST == 'ON'
       - run: |
